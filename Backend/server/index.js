@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import userRoute from './routes/user.route.js';
 import authRoute  from './routes/auth.route.js';
 import cookieParser from 'cookie-parser';
+import cors from 'cors';
 
 
 
@@ -20,6 +21,9 @@ mongoose.connect(
 
 });
 const app = express();
+app.use(cors({
+    origin: 'https://stellular-crostata-4bb6be.netlify.app/'
+  }));
 app.use(express.json());
 app.use(cookieParser());
 app.listen(3000, () =>{
