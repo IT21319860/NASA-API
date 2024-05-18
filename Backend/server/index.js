@@ -21,9 +21,13 @@ mongoose.connect(
 
 });
 const app = express();
-app.use(cors({
-    origin: 'https://stellular-crostata-4bb6be.netlify.app/'
-  }));
+const corsOptions = {
+    origin: 'https://stellular-crostata-4bb6be.netlify.app',
+    optionsSuccessStatus: 200
+};
+
+app.use(cors(corsOptions));
+
 app.use(express.json());
 app.use(cookieParser());
 app.listen(3000, () =>{
