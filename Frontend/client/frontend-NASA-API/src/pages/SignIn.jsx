@@ -9,8 +9,7 @@ import backgroundImage from "../assets/space4.jpg";
 
 export default function SignIn() {
   const [formData, setFormData] = useState({});
-  // const [errorMessage, setErrorMessage] = useState(null);
-  // const [loading, setLoading] = useState(false);
+  
   const {loading, error:errorMessage} = useSelector(state => state.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -21,13 +20,12 @@ export default function SignIn() {
     e.preventDefault();
     if (!formData.email || !formData.password) {
       return dispatch(signInFailure('Please fill out all fields.'));
-      // return setErrorMessage('Please fill out all fields.');
+      
     }
     try {
       dispatch(signInStart());
-      // setLoading(true);
-      // setErrorMessage(null);
-      const res = await fetch('https://nasa-api-v2.onrender.com/api/auth/signin/', {
+      
+      const res = await fetch('https://nasa-api-v2.onrender.com/api/auth/signin', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
@@ -35,17 +33,16 @@ export default function SignIn() {
       const data = await res.json();
       if (data.success === false) {
         dispatch(signInFailure(data.message));
-        // return setErrorMessage(data.message);
+        
       }
-      // setLoading(false);
+      
       if(res.ok) {
         dispatch(signInSuccess(data));
         navigate('/');
       }
     } catch (error) {
       dispatch(signInFailure(error.message));
-      // setErrorMessage(error.message);
-      // setLoading(false);
+      
     }
   };
   return (
