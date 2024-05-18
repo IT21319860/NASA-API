@@ -22,7 +22,7 @@ mongoose.connect(
 });
 const app = express();
 app.use(cors({
-    origin: 'https://stellular-crostata-4bb6be.netlify.app'
+    origin: 'https://stellular-crostata-4bb6be.netlify.app/'
   }));
 app.use(express.json());
 app.use(cookieParser());
